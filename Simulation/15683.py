@@ -3,57 +3,27 @@ input=sys.stdin.readline
 
 n,m=map(int,input().split())
 
-cam=[]
-for _ in range(n):
-  cam.append(list(map(int,input().split())))
+cctv=[]
+office=[]
 
+mode=[
+  [],
+  [[0],[1],[2],[3]],
+  [[0,2],[1,3]],
+  [[0,1],[1,2],[2,3],[0,3]],
+  [[0,1,2],[1,2,3],[0,2,3],[0,1,3]],
+  [[0,1,2,]],
+]
 
-def left(cam,row,col):
-  check=cam[row]
-  loc=0
-  for i in range(col):
-    if check[i]==6:
-      loc=i+1
-      
-      
-  cam[row][loc:col] = ["#"] * (col-(loc))
-  
+dx=[-1,0,1,0]
+dy=[0,1,0,-1]
 
-def right(cam,row,col):
-  check=cam[row]
-  loc=0
-  for i in range(m):
-    if check[i]==6:
-      loc=i
-      
-  cam[row][col+1:loc] = ["#"] * (loc - col)
-  
-
-def up(cam,row,col):
-  check=[i[col] for i in cam][:row] #세로 열 추출 
-  loc=0
-  for i in range(m):
-    if check[i]==6:
-      loc=i
-      
-  wall=check[col:loc]
-  zeros=wall.count(0)
-  return zeros
-
-def down(cam,row,col):
-  check=[i[col] for i in cam][row+1:] #세로 열 추출
-  loc=0
-  for i in range(m):
-    if check[i]==6:
-      loc=i
-      
-  wall=check[col:loc]
-  zeros=wall.count(0)
-  return zeros
-
-
-left(cam,2,2)
-print(cam)
+for i in range(n):
+  tmp=list(map(int,input().split()))
+  office.append()
+  for j in range(m):
+    if office[j] in [1,2,3,4,5]:
+      cctv.append([tmp[j],i,j])
 
 """
 사각 지대의 최소 크기. 카메라가 가능한 한 많은 곳을 비춰야한다. 
@@ -69,5 +39,10 @@ print(cam)
 CCTV가 겹치면 어떡하지?
 사각지대를 찾지말고 0을 #으로 만들까
 그 다음에 0의 개수를 찾으면되려나 
+
+
+CCTV종류와 x,y좌표를 가지는 리스트
+백트래킹으로 회전가능한 모든 경우의 수를 구해야 한다.
+
 
 """
