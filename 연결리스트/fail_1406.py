@@ -91,9 +91,6 @@ class LinkedList:
       self.length+=1
 
     
-      
-    
-
 
 str_ex=sys.stdin.readline().strip()
 n=int(sys.stdin.readline())
