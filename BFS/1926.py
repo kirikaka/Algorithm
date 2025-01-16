@@ -16,9 +16,10 @@ def bfs(visited,y,x):
   dx=[-1,0,0,1] #열 좌상하우
   dy=[0,1,-1,0] #행 좌상하우
   
+  # visited 방문 여부를 판단하는 것.
   visited[y][x]=True
-  que=deque()
-  que.append([y,x])
+  que=deque() #연결된 공간을 판단하는 deque
+  que.append([y,x]) 
   while que:
     value=que.popleft()
     temp+=1
