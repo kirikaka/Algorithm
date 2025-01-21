@@ -30,9 +30,10 @@ def bfs(visited,y,x):
         continue
       if pic[ny][nx]==0:
         continue
-      if not visited[ny][nx]: #방문안한 그림을 방문하면
-        visited[ny][nx]=True #해당 그림을 방문으로 바꾸고
-        que.append([ny,nx]) # 큐에 넣는다. 
+      
+      if not visited[ny][nx]: # 방문안한 그림을 방문하면
+        visited[ny][nx]=True  # 해당 그림을 방문으로 바꾸고
+        que.append([ny,nx])   # 큐에 넣는다. 
     
   return temp
         
