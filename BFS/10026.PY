@@ -10,7 +10,7 @@ visit=[[False]*N for _ in range(N) ]
 """
 일반인은 RGB의 구역을 구분할 수 있다.
 색약인은 RG와 B만 구분할 수 있따.
-R,G,B를 따로 돌린다음에 색약인ㅇ
+R,G,B를 따로 돌린다음에 색약인사람은 
 
 
 """
@@ -37,13 +37,10 @@ def BFS_R(visit):
       if nx<0 or ny<0 or nx>=N or ny>=N:
         continue
       
-      if visit[nx][ny]:
-        continue
-      
-      
-      visit[nx][ny]=True
-      que.append([nx,ny])
-        
+      if not visit[nx][ny] and RGB[nx][ny]=='R':        
+        visit[nx][ny]=True
+        que.append([nx,ny])
+          
         
       
       
