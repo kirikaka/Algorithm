@@ -40,9 +40,60 @@ def BFS_R(visit):
       if not visit[nx][ny] and RGB[nx][ny]=='R':        
         visit[nx][ny]=True
         que.append([nx,ny])
+
+
+def BFS_G(visit):
+  que=deque()
+  que.append([0,0])     #세로,가로,색깔
+  visit[0][0]=True
+  
+
+
+  
+  dx=[-1,1,0,0]
+  dy=[0,0,-1,1]
+  
+  while que:
+    cur=que.popleft()
+    
+    for i in range(4):
+      nx=dx[i]+cur[0]
+      ny=dy[i]+cur[1]
+      
+      if nx<0 or ny<0 or nx>=N or ny>=N:
+        continue
+      
+      if not visit[nx][ny] and RGB[nx][ny]=='G':        
+        visit[nx][ny]=True
+        que.append([nx,ny])
           
         
+def BFS_B(visit):
+  que=deque()
+  que.append([0,0])     #세로,가로,색깔
+  visit[0][0]=True
+  
+
+
+  
+  dx=[-1,1,0,0]
+  dy=[0,0,-1,1]
+  
+  while que:
+    cur=que.popleft()
+    
+    for i in range(4):
+      nx=dx[i]+cur[0]
+      ny=dy[i]+cur[1]
       
+      if nx<0 or ny<0 or nx>=N or ny>=N:
+        continue
+      
+      if not visit[nx][ny] and RGB[nx][ny]=='B':        
+        visit[nx][ny]=True
+        que.append([nx,ny])
+          
+        
       
 
       
