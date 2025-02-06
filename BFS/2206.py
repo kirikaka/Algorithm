@@ -30,7 +30,7 @@ while que:
     cnt=cur[3]
   
   dx=[-1,1,0,0]
-  dy=[0,0,-1,1]
+  dy=[0,0,1,-1]
   
   for i in range(4):
     ny=cur[0]+dy[i]
