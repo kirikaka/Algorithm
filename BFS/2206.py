@@ -33,17 +33,17 @@ while que:
   dy=[0,0,1,-1]
   
   for i in range(4):
-    ny=cur[0]+dy[i]
+    
     nx=cur[1]+dx[i]
-    
-    
+    ny=cur[0]+dy[i]
+        
     if nx<0 or ny<0 or nx>=M or ny>=N:
       continue
     if visit[ny][nx]!=-1:
       continue
-    if move[ny][nx]==1 and cur[3]==1:
+    if move[ny][nx]==1 and cur[3]==True:
       continue
-    if move[ny][nx]==1 and cur[3]==0:
+    if move[ny][nx]==1 and cur[3]==False:
       new_cur=True
     que.append([ny,nx,cur[2]+1,new_cur])
     visit[ny][nx]=cur[2]+1
