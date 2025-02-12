@@ -6,7 +6,7 @@ T=int(input())
 
 for _ in range(T):
   n=int(input())
-  student=[x for x in range(1,n+1)]
+  # student=[x for x in range(1,n+1)]
   togo=list(map(int,input().split()))
 
   visit=[False for _ in range(n)]
@@ -35,18 +35,33 @@ for _ in range(T):
   count=0
   
   for i in range(n):
+    if visit[i]:
+      continue
+    
+
+    count+=1
+    
+    
+    
+    if i+1==togo[i]: #스스로 한팀이 되어버린 경우
+      count-=1
+      continue
+    
     que=deque()
     que.append([i+1,togo[i]])
     print("시작 QUE : ",que)
     visit[i]=True
     
-    if i+1==togo[i]: #스스로 한팀이 되어버린 경우
-      continue
     
     while True:
+
+      
       
       if que[-1][1]==que[0][0]: #Cyclic 한 경우
-        print("STOP 1")
+        # print("STOP 1")
+        count-=1
+        while que:          
+          visit[que.pop()[0]-1]=True
         break
       
       call=que[-1][1]       # call : 마지막으로 넣은원소가 부르는 것.
@@ -58,14 +73,14 @@ for _ in range(T):
         break
       
       que.append([call,togo[call-1]]) #마지막에 들어간 번호, 해당 번호가 부르는 번호
-      print(que)
+      # print(que)
     
     # while que:
       
     
     
-    print(que)
+    # print(que)
     
-  
+  print(count)
   
   
