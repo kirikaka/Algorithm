@@ -24,63 +24,65 @@ for _ in range(T):
   
   deque의 첫 원소의 [0]과 마지막 원소의 [1]이 같은지 비교?
   
-  다르면 팀 없음 count +1
+  다르면 팀 없음 count + 1
   
   
   - 순회로 접근했을 때만 visit True?
   - 방문했으면 visit에 True로 변경.
+  - Cycle이 나온 경우 바로 break하고
+  - 
   - 이미 방문한 원소면 continue
   
   """
   count=0
   
   for i in range(n):
-    if visit[i]:
-      continue
-    
-
-    count+=1
-    
-    
-    
     if i+1==togo[i]: #스스로 한팀이 되어버린 경우
-      count-=1
+      visit[i]=True
+      count+=1
       continue
     
+    if visit[i]:    #이미 방문한 경우
+      continue
+        
     que=deque()
     que.append([i+1,togo[i]])
     print("시작 QUE : ",que)
     visit[i]=True
     
-    
     while True:
+      # print("현재 : ",que)
+      last=que[-1][1]
+      
+      if que[-1][1]==que[0][0]:     #  완벽히 cycle인 경우
+        print("CYCLE")
+        count+=len(que)
+        break
+      
+      if visit[last-1]:             #  다음에 갈 곳이 방문할 곳인지 확인
+        break
+      
+      """
+      [1, 5], [5, 3], [3, 4], [4, 5], [5, 3], [3, 4], [4, 5]
+      같은 경우 어떻게 3,4,5가 Cycle 이란 것을 확인할까
+      
+      
+      """
+      que.append([last,togo[last-1]])     # 일단 방문한 곳이 아니고, 현재 Cycle이 아니면 다 추가
+      visit[last-1]=True
+      
+      
+    while que:
+      if que[0][0]!=que[-1][1]:
+        que.popleft()
 
-      
-      
-      if que[-1][1]==que[0][0]: #Cyclic 한 경우
-        # print("STOP 1")
-        count-=1
-        while que:          
-          visit[que.pop()[0]-1]=True
+      if que[-1][1]==que[0][0]:     #  완벽히 cycle인 경우
+        print("CYCLE")
+        count+=len(que)
         break
       
-      call=que[-1][1]       # call : 마지막으로 넣은원소가 부르는 것.
-      
-      if call==togo[call-1]:          # togo[call-1] : 마지막으러 부른 원소가 뷰르는 것
-        print("togo : ",togo[call-1])
-        print("calll : ",call)
-        print("STOP 2")
-        break
-      
-      que.append([call,togo[call-1]]) #마지막에 들어간 번호, 해당 번호가 부르는 번호
-      # print(que)
-    
-    # while que:
-      
-    
-    
-    # print(que)
-    
-  print(count)
+    print(que)
+
+  print("정답은 : ",n-count)
   
   
