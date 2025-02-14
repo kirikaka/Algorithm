@@ -42,46 +42,20 @@ for _ in range(T):
       count+=1
       continue
     
-    if visit[i]:    #이미 방문한 경우
-      continue
-        
-    que=deque()
-    que.append([i+1,togo[i]])
-    print("시작 QUE : ",que)
-    visit[i]=True
+    out=deque()
+    go=deque()
     
-    while True:
-      # print("현재 : ",que)
-      last=que[-1][1]
-      
-      if que[-1][1]==que[0][0]:     #  완벽히 cycle인 경우
-        print("CYCLE")
-        count+=len(que)
-        break
-      
-      if visit[last-1]:             #  다음에 갈 곳이 방문할 곳인지 확인
-        break
-      
-      """
-      [1, 5], [5, 3], [3, 4], [4, 5], [5, 3], [3, 4], [4, 5]
-      같은 경우 어떻게 3,4,5가 Cycle 이란 것을 확인할까
+    """
+    
+    """
+    
+    if not visit[i]:
+      visit[i]=True
       
       
-      """
-      que.append([last,togo[last-1]])     # 일단 방문한 곳이 아니고, 현재 Cycle이 아니면 다 추가
-      visit[last-1]=True
-      
-      
-    while que:
-      if que[0][0]!=que[-1][1]:
-        que.popleft()
-
-      if que[-1][1]==que[0][0]:     #  완벽히 cycle인 경우
-        print("CYCLE")
-        count+=len(que)
-        break
-      
-    print(que)
+    
+    
+    
 
   print("정답은 : ",n-count)
   
