@@ -11,34 +11,34 @@ for _ in range(T):
 
   visit=[False for _ in range(n)]
   
+   
   """
-  Cyclic í˜•íƒœì¼ ë•ŒëŠ” íŒ€ì„ ì´ë£° ìˆ˜ ìžˆë‹¤. 
-  ë‘ ëª…ì´ë¼ë©´ ì„œë¡œ ì„ íƒí•´ì•¼ Cyclic ì´ë¯€ë¡œ ì„œë¡œ ì„ íƒí•´ì•¼ íŒ€ì´ë¼ê³  ë³¸ë‹¤. 
-  ìŠ¤ìŠ¤ë¡œ ì„ íƒí•˜ë©´ í•˜ë‚˜ì˜ íŒ€ì´ ë  ìˆ˜ ìžˆë‹¤.
+  Cyclic ÇüÅÂÀÏ ¶§´Â ÆÀÀ» ÀÌ·ê ¼ö ÀÖ´Ù. 
+  µÎ ¸íÀÌ¶ó¸é ¼­·Î ¼±ÅÃÇØ¾ß Cyclic ÀÌ¹Ç·Î ¼­·Î ¼±ÅÃÇØ¾ß ÆÀÀÌ¶ó°í º»´Ù. 
+  ½º½º·Î ¼±ÅÃÇÏ¸é ÇÏ³ªÀÇ ÆÀÀÌ µÉ ¼ö ÀÖ´Ù.
   
-  ì–´ëŠ íŒ€ì—ë„ ì†í•˜ì§€ ì•ŠëŠ” í•™ìƒì˜ ìˆ˜ë¥¼ ê³„ì‚°í•´ë¼?
+  ¾î´À ÆÀ¿¡µµ ¼ÓÇÏÁö ¾Ê´Â ÇÐ»ýÀÇ ¼ö¸¦ °è»êÇØ¶ó?
   
-  togoë¥¼ ìˆœíšŒí•˜ë©° í•™ìƒì„ í˜¸ì¶œí•  ë•Œë§ˆë‹¤ dequeì„ ìƒì„±í•œë‹¤. dequeì— ë„£ëŠ” ê²ƒì€ [í˜¸ì¶œìž,ì§€ëª…ìž]
-  í•´ë‹¹ í•™ìƒì´ ì›í•˜ëŠ” í•™ìƒìœ¼ë¡œ í˜¸ì¶œí•˜ê³  í˜¸ì¶œë‹¹í•œ í•™ìƒì´ ë˜ ë‹¤ë¥¸ í•™ìƒì„ í˜¸ì¶œí•œë‹¤.
-  í˜¸ì¶œí•´ì„œ dequeì— ë„£ê³  Cyclicì¸ì§€ íŒë‹¨ì–´ì¼€í•¨?
+  togo¸¦ ¼øÈ¸ÇÏ¸ç ÇÐ»ýÀ» È£ÃâÇÒ ¶§¸¶´Ù dequeÀ» »ý¼ºÇÑ´Ù. deque¿¡ ³Ö´Â °ÍÀº [È£ÃâÀÚ,Áö¸íÀÚ]
+  ÇØ´ç ÇÐ»ýÀÌ ¿øÇÏ´Â ÇÐ»ýÀ¸·Î È£ÃâÇÏ°í È£Ãâ´çÇÑ ÇÐ»ýÀÌ ¶Ç ´Ù¸¥ ÇÐ»ýÀ» È£ÃâÇÑ´Ù.
+  È£ÃâÇØ¼­ deque¿¡ ³Ö°í CyclicÀÎÁö ÆÇ´Ü¾îÄÉÇÔ?
   
-  dequeì˜ ì²« ì›ì†Œì˜ [0]ê³¼ ë§ˆì§€ë§‰ ì›ì†Œì˜ [1]ì´ ê°™ì€ì§€ ë¹„êµ?
+  dequeÀÇ Ã¹ ¿ø¼ÒÀÇ [0]°ú ¸¶Áö¸· ¿ø¼ÒÀÇ [1]ÀÌ °°ÀºÁö ºñ±³?
   
-  ë‹¤ë¥´ë©´ íŒ€ ì—†ìŒ count + 1
+  ´Ù¸£¸é ÆÀ ¾øÀ½ count + 1
   
   
-  - ìˆœíšŒë¡œ ì ‘ê·¼í–ˆì„ ë•Œë§Œ visit True?
-  - ë°©ë¬¸í–ˆìœ¼ë©´ visitì— Trueë¡œ ë³€ê²½.
-  - Cycleì´ ë‚˜ì˜¨ ê²½ìš° ë°”ë¡œ breakí•˜ê³ 
+  - ¼øÈ¸·Î Á¢±ÙÇßÀ» ¶§¸¸ visit True?
+  - ¹æ¹®ÇßÀ¸¸é visit¿¡ True·Î º¯°æ.
+  - CycleÀÌ ³ª¿Â °æ¿ì ¹Ù·Î breakÇÏ°í
   - 
-  - ì´ë¯¸ ë°©ë¬¸í•œ ì›ì†Œë©´ continue
+  - ÀÌ¹Ì ¹æ¹®ÇÑ ¿ø¼Ò¸é continue
   
   """
   count=0
   
   for i in range(n):
-    if i+1==togo[i]: #ìŠ¤ìŠ¤ë¡œ í•œíŒ€ì´ ë˜ì–´ë²„ë¦° ê²½ìš°
-      visit[i]=True
+    if i+1==togo[i]:  #½º½º·Î ÇÑÆÀÀÌ µÇ¾î¹ö¸° °æ¿ì
       count+=1
       continue
     
@@ -57,6 +57,6 @@ for _ in range(T):
     
     
 
-  print("ì •ë‹µì€ : ",n-count)
+  print("Á¤´äÀº: ",count)
   
   
