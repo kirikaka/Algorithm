@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 class Solution {
     public int solution(int[][] maps) {
         int answer = -1;
@@ -8,38 +7,41 @@ class Solution {
         int n=maps.length;
         int m=maps[0].length;
         
-        Queue<int[]> queue=new ArrayDeque<>();
-        boolean[][] visited=new boolean[n][m];
-        queue.offer(new int[]{0,0,1});
+        boolean[][] visited=new boolean[n+1][m+1];
+        
+        ArrayDeque<Integer[]> queue= new ArrayDeque<>();
+        queue.add(new Integer[]{0,0,1});
         visited[0][0]=true;
         
-        int[] dr={-1,1,0,0};
-        int [] dc={0,0,1,-1};
-        
-        
+        int[] dr={0,0,-1,1};
+        int[] dc={1,-1,0,0};
         
         while(!queue.isEmpty()){
-            int[] curr=queue.poll();
-            int curR=curr[0];
-            int curC=curr[1];
-            int currDis=curr[2];
-            
-            if(curR==n-1 && curC==m-1){
-                answer=currDis;
+            Integer []cur=queue.poll();
+            int curRow=cur[0];
+            int curCol=cur[1];
+            int curDist=cur[2];
+            if(curRow==n-1&&curCol==m-1){
+                answer=curDist;
+                break;
             }
             
             
             for(int i=0;i<4;i++){
-                int nextR=curR+dr[i];
-                int nextC=curC+dc[i];
-                if(nextR>=0 && nextC>=0 && nextC<m && nextR<n){
-                    if(!visited[nextR][nextC] && maps[nextR][nextC]==1){
-                        visited[nextR][nextC]=true;
-                        queue.offer(new int[]{nextR,nextC,currDis+1});
+                int nextRow=dr[i]+curRow;
+                int nextCol=dc[i]+curCol;
+                int nextDist=curDist+1;
+                if(nextRow>=0 && nextRow<n && nextCol>=0 && nextCol<m){
+                    if(!visited[nextRow][nextCol] && maps[nextRow][nextCol]==1){
+                        queue.offer(new Integer[]{nextRow,nextCol,nextDist});
+                        visited[nextRow][nextCol]=true;
                     }
                 }
                 
+                
             }
+            
+            
             
         }
         
