@@ -1,50 +1,47 @@
 import java.util.*;
 
 class Solution {
+    private final int[] dx={-1,1,0,0};
+    private final int[] dy={0,0,1,-1};
+    
+    
     public int solution(int[][] maps) {
-        int answer = -1;
+        int n=maps.length;
+        int m=maps[0].length;
         
-        int rowLength=maps.length;
-        int colLength=maps[0].length;
+        int[][]dist=new int[n][m];
+        boolean[][]visited=new boolean[n][m];
         
-        boolean[][] visited=new boolean[rowLength+1][colLength+1];
-        ArrayDeque<int[]> queue=new ArrayDeque<>();
-        
-        queue.add(new int[]{0,0,1});
+        ArrayDeque<int[]>que=new ArrayDeque<>();
+        que.offer(new int[]{0,0});
+        dist[0][0]=1;
         visited[0][0]=true;
-        int[] dr={-1,1,0,0};
-        int[] dc={0,0,1,-1};
         
-        while(!queue.isEmpty()){
-            int []cur=queue.poll();
+        while(!que.isEmpty()){
+            int[] cur=que.poll();
+            int x=cur[0],y=cur[1];
             
-            int curRow=cur[0];
-            int curCol=cur[1];
-            int curDist=cur[2];
-            
-            if(curRow==rowLength-1 && curCol==colLength-1){
-                return curDist;
+            if(x==n-1&&y==m-1){
+                return dist[x][y];
             }
             
-            
             for(int i=0;i<4;i++){
-                int nextRow=curRow+dr[i];
-                int nextCol=curCol+dc[i];
+                int nx=x+dx[i];
+                int ny=y+dy[i];
                 
-                
-                if(nextRow>=0 && nextRow<rowLength && nextCol>=0 && nextCol<colLength){
-                    if(!visited[nextRow][nextCol] && maps[nextRow][nextCol]==1){
-                        queue.add(new int[]{nextRow,nextCol,curDist+1});
-                        visited[nextRow][nextCol]=true;
+                if(nx>=0 && nx<n && ny>=0 && ny<m){
+                    if(!visited[nx][ny] && maps[nx][ny]==1){
+                        visited[nx][ny]=true;
+                        dist[nx][ny]=dist[x][y]+1;
+                        que.offer(new int[]{nx,ny});
                     }
                 }
-                
             }
             
         }
         
         
         
-        return answer;
+        return -1;
     }
 }
