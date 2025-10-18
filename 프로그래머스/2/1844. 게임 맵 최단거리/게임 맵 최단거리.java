@@ -1,39 +1,38 @@
 import java.util.*;
 
 class Solution {
-    private final int[] dx={-1,1,0,0};
-    private final int[] dy={0,0,1,-1};
-    
-    
     public int solution(int[][] maps) {
+        int answer = -1;
+        
         int n=maps.length;
         int m=maps[0].length;
         
-        int[][]dist=new int[n][m];
-        boolean[][]visited=new boolean[n][m];
+        Queue<int[]>queue=new ArrayDeque<>();
+        boolean[][] visited=new boolean[n][m];
         
-        ArrayDeque<int[]>que=new ArrayDeque<>();
-        que.offer(new int[]{0,0});
-        dist[0][0]=1;
+        queue.add(new int[]{0,0,1});
         visited[0][0]=true;
         
-        while(!que.isEmpty()){
-            int[] cur=que.poll();
-            int x=cur[0],y=cur[1];
+        int[] dr={-1,1,0,0};
+        int[] dc={0,0,1,-1};
+        
+        while(!queue.isEmpty()){
+            int[] curr=queue.poll();
+            int curR=curr[0];
+            int curC=curr[1];
+            int curDis=curr[2];
             
-            if(x==n-1&&y==m-1){
-                return dist[x][y];
+            if(curR==n-1 && curC==m-1){
+                answer=curDis;
             }
             
             for(int i=0;i<4;i++){
-                int nx=x+dx[i];
-                int ny=y+dy[i];
-                
-                if(nx>=0 && nx<n && ny>=0 && ny<m){
-                    if(!visited[nx][ny] && maps[nx][ny]==1){
-                        visited[nx][ny]=true;
-                        dist[nx][ny]=dist[x][y]+1;
-                        que.offer(new int[]{nx,ny});
+                int nextR=curR+dr[i];
+                int nextC=curC+dc[i];
+                if(nextR>=0 && nextC>=0 && nextR<n && nextC<m){
+                    if(!visited[nextR][nextC] && maps[nextR][nextC]==1){
+                        visited[nextR][nextC]=true;
+                        queue.offer(new int[]{nextR,nextC,curDis+1});
                     }
                 }
             }
@@ -41,7 +40,6 @@ class Solution {
         }
         
         
-        
-        return -1;
+        return answer;
     }
 }
