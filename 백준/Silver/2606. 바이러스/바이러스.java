@@ -1,49 +1,51 @@
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
+import java.lang.*;
+import java.io.*;
+
 
 public class Main {
-    static int N;
-    static int M;
+    static int n,pair;
+    static ArrayList<ArrayList<Integer>> graph;
     static boolean[] visited;
-    static ArrayList<Integer>[] graph;
     static int count=0;
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
-        visited=new boolean[N+1];
-        graph=new ArrayList[N+1];
-        for(int i=0;i<N+1;i++){
-            graph[i]=new ArrayList<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        pair = Integer.parseInt(br.readLine());
+        graph = new ArrayList<>();
+        visited = new boolean[n+1];
+
+        for(int i=0;i<=n;i++)
+            graph.add(new ArrayList<>());
+
+        StringTokenizer st;
+        for(int i = 0; i < pair; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            graph.get(a).add(b);
+            graph.get(b).add(a);
         }
-        // 연결리스트 입력받기
-        for(int i=0;i<M;i++){
-            int x=sc.nextInt();
-            int y=sc.nextInt();
-
-            graph[x].add(y);
-            graph[y].add(x);
-        }
-
-        dfs(1);
-
+        bfs(1);
         System.out.println(count);
 
 
     }
-    static void dfs(int v){
-        visited[v]=true;
-
-        for(int w:graph[v]){
-            if(!visited[w]){
-                count++;
-                dfs(w);
+    static void bfs(int start){
+        Queue<Integer> q = new LinkedList<>();
+        visited[start] = true;
+        q.add(start);
+        while(!q.isEmpty()){
+            int cur = q.poll();
+            for(int i : graph.get(cur)){
+                if(!visited[i]){
+                    visited[i] = true;
+                    q.add(i);
+                    count++;
+                }
             }
         }
-    }
 
+    }
 }
